@@ -22,6 +22,8 @@ public class ApplicationDbContext : DbContext
             .Build();
 
         string connectionString = config.GetConnectionString("DefaultConnection") ?? throw new Exception("Ошибка в OnConfiguring");
-        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        optionsBuilder
+        .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+        .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
     }
 }

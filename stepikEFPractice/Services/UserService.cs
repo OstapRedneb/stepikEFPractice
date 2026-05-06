@@ -35,12 +35,33 @@ public class UserService
     {
         try
         {
-            using ApplicationDbContext dbContext = new();
-
+            using ApplicationDbContext context = new();
+            context.Users.Add(user);
+            return context.SaveChanges() == 1;
         }
         catch
         {
-
+            return false;
+        }
+    }
+    /// <summary>
+    /// Форматирование показателей пользователя
+    /// </summary>
+    /// <param name="number">Число для форматирования</param>
+    /// <returns>Отформатированное число</returns>
+    public string? FormatUserMetrics(int number)
+    {
+        if (number < 1000)
+        {
+            return number.ToString();
+        }
+        else
+        {
+            double formattedNumber = number / 1000.0;
+            string formattedString = formattedNumber
+                .ToString("0.0K", System.Globalization.CultureInfo.InvariantCulture)
+                .Replace(".0K", "K");
+            return formattedString;
         }
     }
 }
