@@ -9,12 +9,6 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users {get; set;}
 
-    public ApplicationDbContext()
-    {
-        Database.EnsureDeleted();
-        Database.EnsureCreated();
-    }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         IConfiguration config = new ConfigurationBuilder()
@@ -22,8 +16,9 @@ public class ApplicationDbContext : DbContext
             .Build();
 
         string connectionString = config.GetConnectionString("DefaultConnection") ?? throw new Exception("Ошибка в OnConfiguring");
+        
         optionsBuilder
-        .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-        .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
+            .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+            .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
     }
 }
