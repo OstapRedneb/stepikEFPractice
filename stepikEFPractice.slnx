@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="stepikEFPractice/stepikEFPractice.csproj" />
+  <Project Path="stepikEFPractice_API/stepikEFPractice_API.csproj" />
+  <Project Path="stepikEFPractice_TEST/stepikEFPractice_TEST.csproj" />
 </Solution>
