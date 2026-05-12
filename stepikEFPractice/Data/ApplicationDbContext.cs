@@ -8,6 +8,10 @@ namespace stepikEFPractice.Data;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users {get; set;}
+    public ApplicationDbContext()
+    {
+        Database.Migrate();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

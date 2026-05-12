@@ -15,7 +15,7 @@ public class UserService
     {
         using ApplicationDbContext context = new();
 
-        return context.Users.FirstOrDefault(user =>user.Full_Name == fullName && user.Is_Active);
+        return context.Users.FirstOrDefault(user =>user.FullName == fullName && user.IsActive);
     }
     /// <summary>
     /// Получение общего количества пользователей

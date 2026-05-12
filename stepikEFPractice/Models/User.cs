@@ -1,28 +1,56 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace stepikEFPractice.Models;
 
+[Table("users")]
 public class User
 {
+    [Key]
+    [Column("id")]
     public int Id { get; set; }
-    public string Full_Name { get; set; }
+
+    [Column("full_name")]
+    public string FullName { get; set; }
+
+    [Column("details")]
     public string? Details { get; set; }
-    public DateTime Join_Date { get; set; }
+
+    [Column("join_date")]
+    public DateTime JoinDate { get; set; }
+
+    [Column("avatar")]
     public string? Avatar { get; set; }
-    public bool Is_Active { get; set; }
+
+    [Column("is_active")]
+    public bool IsActive { get; set; }
+
+    [Column("knowledge")]
     public int Knowledge { get; set; } = 0;
+
+    [Column("reputation")]
     public int Reputation { get; set; } = 0;
-    public int Followers_Count { get; set; } = 0;
-    public int Days_Without_Break { get; set; } = 0;
+
+    [Column("folowers_count")]
+    public int FollowersCount { get; set; } = 0;
+
+    [Column("days_without_break")]
+    public int DaysWithoutBreak { get; set; } = 0;
+
+    [Column("days_without_break_max")]
     public int DaysWithoutBreakMax { get; set; } = 0;
-    public int Solved_Tasks { get; set; } = 0;
+
+    [Column("solved_tasks")]
+    public int SolvedTasks { get; set; } = 0;
+
 
     public User() : this("Vitalik")
     { }
     public User(string name)
     {
-        Full_Name = name;
-        Join_Date = DateTime.Now;
-        Is_Active = true;
+        FullName = name;
+        JoinDate = DateTime.Now;
+        IsActive = true;
     }
 }
