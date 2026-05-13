@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using stepikEFPractice.Data;
 using stepikEFPractice.Models;
 
@@ -8,9 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        //using ApplicationDbContext context = new ApplicationDbContext();
-
-        //Console.WriteLine(string.Join('\n', context.Users.Select(user => user.Full_Name)));
-        //Console.WriteLine("Sucsess");
+        using ApplicationDbContext context = new ApplicationDbContext();
+        context.Database.Migrate();
     }
 }
