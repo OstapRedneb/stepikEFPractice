@@ -44,6 +44,8 @@ public class User
     [Column("solved_tasks")]
     public int SolvedTasks { get; set; } = 0;
 
+    public List<UserSocialProvider> UserSocialProviders { get; set; }
+
 
     public User() : this("Vitalik")
     { }
