@@ -1,4 +1,8 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using stepikEFPractice.Data;
 using stepikEFPractice.Models;
 
@@ -15,7 +19,7 @@ public class UserService
     {
         using ApplicationDbContext context = new();
 
-        return context.Users.FirstOrDefault(user =>user.FullName == fullName && user.IsActive);
+        return context.Users.FirstOrDefault(user => user.FullName == fullName && user.IsActive);
     }
     /// <summary>
     /// Получение общего количества пользователей
@@ -63,5 +67,45 @@ public class UserService
                 .Replace(".0K", "K");
             return formattedString;
         }
+    }
+    /// <summary>
+    /// Рейтинг пользователей (топ-10 по знаниям)
+    /// </summary>
+    /// <returns>DataSet</returns>
+    public DataSet GetUserRating()
+    {
+        using ApplicationDbContext dbContext = new();
+
+        // Запрос к базе данных
+        var userRatings = dbContext.Users
+            .Where(user => user.IsActive)
+            .AsNoTracking()
+            .OrderByDescending(user => user.Knowledge)
+            .Take(10)
+            .Select(user => new 
+                { 
+                    FullName = user.FullName, 
+                    Knowledge = user.Knowledge, 
+                    Reputation = user.Reputation 
+                })
+            .ToList();
+
+        // Создание DataTable и заполнение данными
+        DataSet dataSet = new DataSet();
+
+        DataTable table = new DataTable("user_rating");
+
+        table.Columns.AddRange([
+            new DataColumn() {ColumnName = "full_name", DataType = typeof(string)},
+            new DataColumn() {ColumnName = "knowledge", DataType = typeof(int)},
+            new DataColumn() {ColumnName = "reputation", DataType = typeof(int)}]);
+
+        userRatings.ForEach(userRating => 
+            table.Rows.Add(userRating.FullName, userRating.Knowledge, userRating.Reputation));
+
+        // Добавление DataTable в DataSet
+        dataSet.Tables.Add(table);
+
+        return dataSet;
     }
 }

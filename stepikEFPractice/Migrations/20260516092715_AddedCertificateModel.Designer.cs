@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using stepikEFPractice.Data;
 
@@ -11,9 +12,11 @@ using stepikEFPractice.Data;
 namespace stepikEFPractice.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260516092715_AddedCertificateModel")]
+    partial class AddedCertificateModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,53 +86,6 @@ namespace stepikEFPractice.Migrations
                     b.ToTable("certificate_settings");
                 });
 
-            modelBuilder.Entity("stepikEFPractice.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AbuseCount")
-                        .HasColumnType("int")
-                        .HasColumnName("abuse_count");
-
-                    b.Property<int>("EpicCount")
-                        .HasColumnType("int")
-                        .HasColumnName("epic_count");
-
-                    b.Property<int?>("ReplyCommentId")
-                        .HasColumnType("int")
-                        .HasColumnName("reply_comment_id");
-
-                    b.Property<int?>("StepId")
-                        .HasColumnType("int")
-                        .HasColumnName("step_id");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("text");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("time");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReplyCommentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("comments");
-                });
-
             modelBuilder.Entity("stepikEFPractice.Models.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -164,50 +120,6 @@ namespace stepikEFPractice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("courses");
-                });
-
-            modelBuilder.Entity("stepikEFPractice.Models.CourseReview", b =>
-                {
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int")
-                        .HasColumnName("course_id");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("user_id");
-
-                    b.Property<int>("AbuseCount")
-                        .HasColumnType("int")
-                        .HasColumnName("abuse_count");
-
-                    b.Property<int?>("CommentId")
-                        .HasColumnType("int")
-                        .HasColumnName("comment_id");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("created_date");
-
-                    b.Property<int>("EpicCount")
-                        .HasColumnType("int")
-                        .HasColumnName("epic_count");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int")
-                        .HasColumnName("score");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("longtext")
-                        .HasColumnName("text");
-
-                    b.HasKey("CourseId", "UserId");
-
-                    b.HasIndex("CommentId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("course_reviews");
                 });
 
             modelBuilder.Entity("stepikEFPractice.Models.SocialProvider", b =>
@@ -367,48 +279,6 @@ namespace stepikEFPractice.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("stepikEFPractice.Models.Comment", b =>
-                {
-                    b.HasOne("stepikEFPractice.Models.Comment", "ReplyComment")
-                        .WithMany("ReplyComments")
-                        .HasForeignKey("ReplyCommentId");
-
-                    b.HasOne("stepikEFPractice.Models.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ReplyComment");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("stepikEFPractice.Models.CourseReview", b =>
-                {
-                    b.HasOne("stepikEFPractice.Models.Comment", "Comment")
-                        .WithOne("CourseReview")
-                        .HasForeignKey("stepikEFPractice.Models.CourseReview", "CommentId");
-
-                    b.HasOne("stepikEFPractice.Models.Course", "Course")
-                        .WithMany("CourseReviews")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("stepikEFPractice.Models.User", "User")
-                        .WithMany("CourseReviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("stepikEFPractice.Models.Unit", b =>
                 {
                     b.HasOne("stepikEFPractice.Models.Course", "Course")
@@ -439,22 +309,12 @@ namespace stepikEFPractice.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("stepikEFPractice.Models.Comment", b =>
-                {
-                    b.Navigation("CourseReview")
-                        .IsRequired();
-
-                    b.Navigation("ReplyComments");
-                });
-
             modelBuilder.Entity("stepikEFPractice.Models.Course", b =>
                 {
                     b.Navigation("CertificateSetting")
                         .IsRequired();
 
                     b.Navigation("Certificates");
-
-                    b.Navigation("CourseReviews");
 
                     b.Navigation("Units");
                 });
@@ -467,10 +327,6 @@ namespace stepikEFPractice.Migrations
             modelBuilder.Entity("stepikEFPractice.Models.User", b =>
                 {
                     b.Navigation("Certificates");
-
-                    b.Navigation("Comments");
-
-                    b.Navigation("CourseReviews");
 
                     b.Navigation("UserSocialProviders");
                 });

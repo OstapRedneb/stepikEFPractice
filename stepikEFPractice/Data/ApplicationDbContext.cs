@@ -12,6 +12,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<UserSocialProvider> UserSocialProviders { get; set; }
     public DbSet<SocialProvider> SocialProviders { get; set; }
     public DbSet<Unit> Units { get; set; }
+    public DbSet<Certificate> Certificates { get; set; }
+    public DbSet<Comment> Comments { get; set; }
+    public DbSet<CourseReview> CourseReviews { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
