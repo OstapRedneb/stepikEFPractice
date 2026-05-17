@@ -50,5 +50,7 @@ public class CertificateService
                     userCertificate.Grade));
         
         dataSet.Tables.Add(table);
+
+        return dataSet;
     }
 }
