@@ -21,5 +21,7 @@ namespace stepikEFPractice.Models
         public string? Title { get; set; }
 
         public Course Course { get; set; }
+
+        public List<Lesson> Lessons { get; set; }
     }
 }

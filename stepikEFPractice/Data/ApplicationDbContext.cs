@@ -15,6 +15,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Certificate> Certificates { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<CourseReview> CourseReviews { get; set; }
+    public DbSet<Lesson> Lessons { get; set; }
+    public DbSet<Step> Steps { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
