@@ -32,4 +32,5 @@ public class Course
     public List<Unit> Units { get; set; }
     public List<Certificate> Certificates { get; set; }
     public List<CourseReview> CourseReviews { get; set; }
+    public List<User> Users { get; set; }
 }
