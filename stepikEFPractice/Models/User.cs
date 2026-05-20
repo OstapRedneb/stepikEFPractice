@@ -1,20 +1,18 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-namespace stepikEFPractice.Models;
 
 [Table("users")]
 public class User
 {
-    [Key]
     [Column("id")]
     public int Id { get; set; }
 
     [Column("full_name")]
+    [StringLength(50)]
     public string FullName { get; set; }
 
     [Column("details")]
+    [StringLength(50)]
     public string? Details { get; set; }
 
     [Column("join_date")]
@@ -27,36 +25,29 @@ public class User
     public bool IsActive { get; set; }
 
     [Column("knowledge")]
-    public int Knowledge { get; set; } = 0;
+    public int Knowledge { get; set; }
 
     [Column("reputation")]
-    public int Reputation { get; set; } = 0;
+    public int Reputation { get; set; }
 
-    [Column("folowers_count")]
-    public int FollowersCount { get; set; } = 0;
+    [Column("followers_count")]
+    public int FollowersCount { get; set; }
 
     [Column("days_without_break")]
-    public int DaysWithoutBreak { get; set; } = 0;
+    public int DaysWithoutBreak { get; set; }
 
     [Column("days_without_break_max")]
-    public int DaysWithoutBreakMax { get; set; } = 0;
+    public int DaysWithoutBreakMax { get; set; }
 
     [Column("solved_tasks")]
-    public int SolvedTasks { get; set; } = 0;
+    public int SolvedTasks { get; set; }
 
 
-    public List<UserSocialProvider> UserSocialProviders { get; set; }
+    public List<UserCourse> UserCourses { get; set; }
+    public List<CourseAuthor> CourseAuthors { get; set; }
     public List<Certificate> Certificates { get; set; }
+    public List<UserSocialProvider> UserSocialProviders { get; set; }
+    public List<Progress> Progresses { get; set; }
     public List<Comment> Comments { get; set; }
     public List<CourseReview> CourseReviews { get; set; }
-    public List<Course> Courses { get; set; }
-
-    public User() : this("Vitalik")
-    { }
-    public User(string name)
-    {
-        FullName = name;
-        JoinDate = DateTime.Now;
-        IsActive = true;
-    }
 }

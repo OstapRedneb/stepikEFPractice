@@ -1,13 +1,8 @@
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace stepikEFPractice.Models;
 
 [Table("social_providers")]
 public class SocialProvider
 {
-    [Key]
     [Column("id")]
     public int Id { get; set; }
 

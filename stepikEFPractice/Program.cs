@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using stepikEFPractice.Data;
-using stepikEFPractice.Models;
 
 namespace stepikEFPractice;
 

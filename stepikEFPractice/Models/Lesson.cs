@@ -1,13 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-namespace stepikEFPractice.Models;
 
 [Table("lessons")]
 public class Lesson
 {
-    [Key]
     [Column("id")]
     public int Id { get; set; }
 
@@ -21,6 +16,6 @@ public class Lesson
     public int AbuseCount { get; set; }
 
 
-    public List<Unit> Units { get; set; }
+    public List<UnitLesson> UnitLessons { get; set; }
     public List<Step> Steps { get; set; }
 }

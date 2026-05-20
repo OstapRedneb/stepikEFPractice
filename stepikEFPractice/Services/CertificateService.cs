@@ -1,6 +1,5 @@
 using System;
 using stepikEFPractice.Data;
-using stepikEFPractice.Models;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 

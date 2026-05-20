@@ -1,7 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using stepikEFPractice.Models;
 
 namespace stepikEFPractice.Data;
 
@@ -17,6 +16,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<CourseReview> CourseReviews { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
     public DbSet<Step> Steps { get; set; }
+    public DbSet<CertificateSetting> CertificateSettings {get; set;}
+    public DbSet<CourseAuthor> CourseAuthors {get; set;}
+    public DbSet<Progress> Progresses {get; set;}
+    public DbSet<UnitLesson> UnitLessons {get; set;}
+    public DbSet<UserCourse> UserCourses {get; set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

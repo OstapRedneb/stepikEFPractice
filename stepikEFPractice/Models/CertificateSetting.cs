@@ -1,13 +1,10 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-namespace stepikEFPractice.Models;
 
 [Table("certificate_settings")]
 public class CertificateSetting
 {
-    [Key, ForeignKey(nameof(Course))]
+    [Key]
     [Column("course_id")]
     public int CourseId { get; set; }
 
@@ -25,4 +22,6 @@ public class CertificateSetting
 
     [Column("excellent_threshold")]
     public int ExcellentThreshold { get; set; }
+
+    public Course Course { get; set; }
 }

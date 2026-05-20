@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [PrimaryKey(nameof(UserId), nameof(CourseId))]
-[Table("certificates")]
-public class Certificate
+[Table("user_courses")]
+public class UserCourse
 {
     [Column("user_id")]
     public int UserId { get; set; }
@@ -11,14 +11,17 @@ public class Certificate
     [Column("course_id")]
     public int CourseId { get; set; }
 
-    [Column("grade")]
-    public int Grade { get; set; }
+    [Column("is_favorite")]
+    public bool IsFavorite { get; set; }
 
-    [Column("issue_date")]
-    public DateTime IssueDate { get; set; }
+    [Column("is_pinned")]
+    public bool IsPinned { get; set; }
 
-    [Column("url")]
-    public string Url { get; set; }
+    [Column("is_archived")]
+    public bool IsArchived { get; set; }
+
+    [Column("last_viewed")]
+    public DateTime LastViewed { get; set; }
 
     public User User { get; set; }
     public Course Course { get; set; }

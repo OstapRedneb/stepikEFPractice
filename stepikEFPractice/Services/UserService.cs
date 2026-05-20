@@ -4,7 +4,6 @@ using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using stepikEFPractice.Data;
-using stepikEFPractice.Models;
 
 namespace stepikEFPractice.Services;
 

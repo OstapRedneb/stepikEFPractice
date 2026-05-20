@@ -1,19 +1,14 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.ConstrainedExecution;
-
-namespace stepikEFPractice.Models;
 
 [Table("courses")]
 public class Course
 {
-    [Key]
     [Column("id")]
     public int Id { get; set; }
 
-    [StringLength(50)]
     [Column("title")]
+    [StringLength(50)]
     public string Title { get; set; }
 
     [Column("created_date")]
@@ -25,12 +20,14 @@ public class Course
     [Column("photo")]
     public string? Photo { get; set; }
 
-    [Column("price", TypeName = "decimal(10, 2)")]
+    [Column("price")]
     public decimal Price { get; set; }
 
+
     public CertificateSetting CertificateSetting { get; set; }
-    public List<Unit> Units { get; set; }
+    public List<UserCourse> UserCourses { get; set; }
+    public List<CourseAuthor> CourseAuthors { get; set; }
     public List<Certificate> Certificates { get; set; }
+    public List<Unit> Units { get; set; }
     public List<CourseReview> CourseReviews { get; set; }
-    public List<User> Users { get; set; }
 }
