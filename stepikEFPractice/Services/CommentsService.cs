@@ -33,8 +33,29 @@ public class CommentsService
     /// <returns>Удалось ли удалить комментарий</returns>
     public bool Delete(int id)
     {
-        using ApplicationDbContext dbContext = new();
+        try
+        {
+            using ApplicationDbContext dbContext = new();
 
-        return dbContext.RemoveRange()
+            var courseReviews = dbContext.CourseReviews.Where(cr => cr.CommentId == id);
+            dbContext.CourseReviews.RemoveRange(courseReviews);
+
+            var replies = dbContext.Comments.Where(c => c.ReplyCommentId == id);
+            dbContext.Comments.RemoveRange(replies);
+
+            var comment = dbContext.Comments.FirstOrDefault(c => c.Id == id);
+            if (comment != null)
+            {
+                dbContext.Comments.Remove(comment);
+            }
+
+            dbContext.SaveChanges();
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }
